@@ -20,7 +20,7 @@ namespace APICommentBook.Controllers
             {
                 npgSqlConnection.Open();
                 // File.AppendAllText("log", "Соединение с БД открыто\n");
-                NpgsqlCommand npgSqlCommand = new NpgsqlCommand("SELECT * FROM direction", npgSqlConnection);
+                NpgsqlCommand npgSqlCommand = new NpgsqlCommand("SELECT * FROM directions", npgSqlConnection);
                 NpgsqlDataReader npgSqlDataReader = npgSqlCommand.ExecuteReader();
                 if (npgSqlDataReader.HasRows)
                 {
@@ -28,7 +28,7 @@ namespace APICommentBook.Controllers
                         directions.Add(new Direction()
                         {
                             Id = int.Parse(dbDataRecord["id"].ToString()),
-                            Name = dbDataRecord["namedirection"].ToString()
+                            Name = dbDataRecord["name"].ToString()
                         });
                 }
                 return directions;

@@ -20,7 +20,7 @@ namespace APICommentBook.Controllers
             {
                 npgSqlConnection.Open();
                 // File.AppendAllText("log", "Соединение с БД открыто\n");
-                NpgsqlCommand npgSqlCommand = new NpgsqlCommand("SELECT * FROM course", npgSqlConnection);
+                NpgsqlCommand npgSqlCommand = new NpgsqlCommand("SELECT * FROM courses", npgSqlConnection);
                 NpgsqlDataReader npgSqlDataReader = npgSqlCommand.ExecuteReader();
                 if (npgSqlDataReader.HasRows)
                 {
@@ -28,7 +28,7 @@ namespace APICommentBook.Controllers
                         courses.Add(new Course()
                         {
                             Id = int.Parse(dbDataRecord["id"].ToString()),
-                            Name = dbDataRecord["namecourse"].ToString()
+                            Name = dbDataRecord["name"].ToString()
                         });
                 }
                 return courses;
