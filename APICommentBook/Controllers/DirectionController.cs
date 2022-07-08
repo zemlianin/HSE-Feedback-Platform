@@ -8,38 +8,38 @@ using System.Data.Common;
 using APICommentBook.Models;
 namespace APICommentBook.Controllers
 {
-    public class FacultsController : Controller
+    public class DirectionController : Controller
     {
-        [HttpGet("Get-name-Facults")]
-        public List<Facult> GetNameFacults()
+        [HttpGet("Get-name-Directions")]
+        public List<Direction> GetNameDirections()
         {
-            List<Facult> facults = new List<Facult>();
+            List<Direction> directions = new List<Direction>();
             String connectionString = "Server=postgres;Port=5432;User Id=app;Password=app;Database=mydbname;";
             //String connectionString = "Server=localhost;Port=5432;Database=mydbname;User Id=app;Password=app;";
             using (NpgsqlConnection npgSqlConnection = new NpgsqlConnection(connectionString))
             {
                 npgSqlConnection.Open();
-               // File.AppendAllText("log", "Соединение с БД открыто\n");
+                // File.AppendAllText("log", "Соединение с БД открыто\n");
                 NpgsqlCommand npgSqlCommand = new NpgsqlCommand("SELECT * FROM facult", npgSqlConnection);
                 NpgsqlDataReader npgSqlDataReader = npgSqlCommand.ExecuteReader();
                 if (npgSqlDataReader.HasRows)
                 {
                     foreach (DbDataRecord dbDataRecord in npgSqlDataReader)
-                        facults.Add(new Facult()
+                        directions.Add(new Direction()
                         {
                             Id = int.Parse(dbDataRecord["id"].ToString()),
-                            Name = dbDataRecord["namefacult"].ToString()
-                        }) ;
+                            Name = dbDataRecord["namedirection"].ToString()
+                        });
                 }
-                return facults;
+                return directions;
 
             }
         }
 
-        private Facult ReadDateBaseAboutFacult(string server, string port, string user, string password, string database, string action)
+        private Direction ReadDateBaseAboutDirections(string server, string port, string user, string password, string database, string action)
         {
-            List<Facult> facults = new List<Facult>();
-            //String connectionString = "Server=localhost;Port=5432;User Id=postgres;Password=1Q2w3e4r5t;Database=Facults;";
+            List<Direction> directions = new List<Direction>();
+            //String connectionString = "Server=localhost;Port=5432;User Id=postgres;Password=1Q2w3e4r5t;Database=Directions;";
             String connectionString = $"Server={server};Port={port};User Id={user};Password={password};Database={database};";
             using (NpgsqlConnection npgSqlConnection = new NpgsqlConnection(connectionString))
             {
@@ -50,13 +50,13 @@ namespace APICommentBook.Controllers
                 if (npgSqlDataReader.HasRows)
                 {
                     foreach (DbDataRecord dbDataRecord in npgSqlDataReader)
-                        facults.Add(new Facult()
+                        directions.Add(new Direction()
                         {
                             Id = int.Parse(dbDataRecord["id"].ToString()),
-                            Name = dbDataRecord["namefacult"].ToString()
+                            Name = dbDataRecord["namedirection"].ToString()
                         });
                 }
-                return facults[0];
+                return directions[0];
 
             }
         }
