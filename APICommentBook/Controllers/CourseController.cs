@@ -14,7 +14,7 @@ namespace APICommentBook.Controllers
         public List<Course> GetNameCourses()
         {
             List<Course> courses = new List<Course>();
-            String connectionString = "Server=postgres;Port=5432;User Id=app;Password=app;Database=mydbname;";
+            String connectionString = "Server=postgres;Port=5432;User Id=app;Password=app;Database=mydbname2;";
             //String connectionString = "Server=localhost;Port=5432;Database=mydbname;User Id=app;Password=app;";
             using (NpgsqlConnection npgSqlConnection = new NpgsqlConnection(connectionString))
             {

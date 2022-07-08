@@ -28,7 +28,7 @@ namespace APICommentBook.Controllers
                         facults.Add(new Facult()
                         {
                             Id = int.Parse(dbDataRecord["id"].ToString()),
-                            Name = dbDataRecord["namefacult"].ToString()
+                            Name = dbDataRecord["name"].ToString()
                         }) ;
                 }
                 return facults;
