@@ -5,13 +5,8 @@ using System.Threading.Tasks;
 
 namespace APICommentBook.Models
 {
-    public class Facult
+    public class Facult : BaseClass
     {
-        /*Facult(int id,n)
-        {
-            this.id = id;
-        }*/
-        public int id { get; set; }
-        public string name { get; set; }
+        public int FacultId { get; set; }
     }
 }
