@@ -20,7 +20,7 @@ namespace APICommentBook.Controllers
             {
                 npgSqlConnection.Open();
                 // File.AppendAllText("log", "Соединение с БД открыто\n");
-                NpgsqlCommand npgSqlCommand = new NpgsqlCommand("SELECT * FROM facult", npgSqlConnection);
+                NpgsqlCommand npgSqlCommand = new NpgsqlCommand("SELECT * FROM direction", npgSqlConnection);
                 NpgsqlDataReader npgSqlDataReader = npgSqlCommand.ExecuteReader();
                 if (npgSqlDataReader.HasRows)
                 {
