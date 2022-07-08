@@ -14,13 +14,13 @@ namespace APICommentBook.Controllers
         public List<Facult> GetNameFacults()
         {
             List<Facult> facults = new List<Facult>();
-            String connectionString = "Server=postgres;Port=5432;User Id=app;Password=app;Database=mydbname;";
-            //String connectionString = "Server=localhost;Port=5432;Database=mydbname;User Id=app;Password=app;";
+            String connectionString = "Server=postgres;Port=5432;User Id=app;Password=app;Database=mydbname2;";
+           
             using (NpgsqlConnection npgSqlConnection = new NpgsqlConnection(connectionString))
             {
                 npgSqlConnection.Open();
                // File.AppendAllText("log", "Соединение с БД открыто\n");
-                NpgsqlCommand npgSqlCommand = new NpgsqlCommand("SELECT * FROM facult", npgSqlConnection);
+                NpgsqlCommand npgSqlCommand = new NpgsqlCommand("SELECT * FROM facults", npgSqlConnection);
                 NpgsqlDataReader npgSqlDataReader = npgSqlCommand.ExecuteReader();
                 if (npgSqlDataReader.HasRows)
                 {
