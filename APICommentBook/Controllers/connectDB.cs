@@ -47,6 +47,37 @@ namespace APICommentBook.Controllers
             }
         }
 
+        internal static List<Comment> ReadDateBaseComment(string command)
+           
+        {
+            List<Comment> list = new List<Comment>();
+            String connectionString = "Server=postgres;Port=5432;User Id=app;Password=app;Database=mydbname2;";
+            using (NpgsqlConnection npgSqlConnection = new NpgsqlConnection(connectionString))
+            {
+                npgSqlConnection.Open();
+                NpgsqlCommand npgSqlCommand = new NpgsqlCommand(command, npgSqlConnection);
+                NpgsqlDataReader npgSqlDataReader = npgSqlCommand.ExecuteReader();
+                if (npgSqlDataReader.HasRows)
+                {
+                    foreach (DbDataRecord dbDataRecord in npgSqlDataReader)
+                    {
+                        
+                            list.Add(new Comment()
+                            {
+                                Id = int.Parse(dbDataRecord["id"].ToString()),
+                                Name = dbDataRecord["name"].ToString(),
+                                ExternalId = int.Parse(dbDataRecord["externalId"].ToString()),
+                                Time = dbDataRecord["time"].ToString(),
+                                Text = dbDataRecord["info"].ToString(),
+                            });
+                        
+                        
+                    }
+                }
+                return list;
+            }
+        }
+
 
         internal static void WriteDateBase(string command)
             

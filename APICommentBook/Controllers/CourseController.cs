@@ -15,6 +15,11 @@ namespace APICommentBook.Controllers
         {
             return connectDB.ReadDateBasePartStudy<Course>("SELECT * FROM courses");
         }
+        [HttpGet("Get-comments-Courses")]
+        public List<Comment> GetComments()
+        {
+            return connectDB.ReadDateBaseComment("SELECT * FROM coursesComments");
+        }
         [HttpPost("write-course")]
         public void SetWriteRecord([FromBody] Course course )
         {
