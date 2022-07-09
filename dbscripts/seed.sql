@@ -2,61 +2,66 @@
 
 CREATE TABLE facults
 (
-	id int primary Key
-	,
+	   id SERIAL primary key,
 	name text not null
 	
 );
 
 CREATE TABLE facultComments
 (
-    id int PRIMARY KEY,
-    facultId int,
+    id SERIAL primary key,
+	name text,
+	time text,
     info text,
+	facultId int,
     FOREIGN KEY (facultId) REFERENCES facults (id)
 );
 
 CREATE TABLE directions
 (
-	id int PRIMARY KEY,
-    facultId int,
+	id SERIAL primary key,
+    externalId int,
     name text not null,
-    FOREIGN KEY (facultId) REFERENCES facults (id)
+    FOREIGN KEY (externalId) REFERENCES facults (id)
 	
 );
 CREATE TABLE directionComments
 (
-    id int PRIMARY KEY,
-    directionId int,
+    id SERIAL primary key,
+	name text,
+	time text,
     info text,
+    directionId int,   
     FOREIGN KEY (directionId) REFERENCES directions (id)
 );
 
 
 CREATE TABLE courses
 (
-    id int PRIMARY KEY,
-    directionId int,
+    id SERIAL primary key,
+    externalId int,
     name text,
-    FOREIGN KEY (directionId) REFERENCES directions (id)
+    FOREIGN KEY (externalId) REFERENCES directions (id)
 );
 
 CREATE TABLE coursesComments
 (
-    id int PRIMARY KEY,
-    courseId int,
+    id SERIAL primary key,
+	name text,
+	time text,
     info text,
+    courseId int,
     FOREIGN KEY (courseId) REFERENCES courses (id)
 );
 
 
-insert into facults values
-(1,'ФКН'),
-(2,'ФГН'),
-(3,'МИЭМ'),
-(4,'ФЭН');
-insert into directions values
-(1,1,'ПИ');
-insert into courses values
-(1,1,'Программирование на C#');
+insert into facults(name) values
+('ФКН'),
+('ФГН'),
+('МИЭМ'),
+('ФЭН');
+insert into directions(externalId,name) values
+(1,'ПИ');
+insert into courses(externalId,name) values
+(1,'Программирование на C#');
 

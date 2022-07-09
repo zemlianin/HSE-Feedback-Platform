@@ -13,53 +13,15 @@ namespace APICommentBook.Controllers
         [HttpGet("Get-name-Facults")]
         public List<Facult> GetNameFacults()
         {
-            List<Facult> facults = new List<Facult>();
-            String connectionString = "Server=postgres;Port=5432;User Id=app;Password=app;Database=mydbname2;";
-           
-            using (NpgsqlConnection npgSqlConnection = new NpgsqlConnection(connectionString))
-            {
-                npgSqlConnection.Open();
-               // File.AppendAllText("log", "Соединение с БД открыто\n");
-                NpgsqlCommand npgSqlCommand = new NpgsqlCommand("SELECT * FROM facults", npgSqlConnection);
-                NpgsqlDataReader npgSqlDataReader = npgSqlCommand.ExecuteReader();
-                if (npgSqlDataReader.HasRows)
-                {
-                    foreach (DbDataRecord dbDataRecord in npgSqlDataReader)
-                        facults.Add(new Facult()
-                        {
-                            Id = int.Parse(dbDataRecord["id"].ToString()),
-                            Name = dbDataRecord["name"].ToString()
-                        }) ;
-                }
-                return facults;
-
-            }
+            return connectDB.ReadDateBasePartStudy<Facult>("SELECT * FROM facults");
         }
 
-        private Facult ReadDateBaseAboutFacult(string server, string port, string user, string password, string database, string action)
+        [HttpPost("write-facults")]
+        public void SetWriteRecord([FromBody] Facult facult)
         {
-            List<Facult> facults = new List<Facult>();
-            //String connectionString = "Server=localhost;Port=5432;User Id=postgres;Password=1Q2w3e4r5t;Database=Facults;";
-            String connectionString = $"Server={server};Port={port};User Id={user};Password={password};Database={database};";
-            using (NpgsqlConnection npgSqlConnection = new NpgsqlConnection(connectionString))
-            {
-                npgSqlConnection.Open();
-                // File.AppendAllText("log", "Соединение с БД открыто\n");
-                NpgsqlCommand npgSqlCommand = new NpgsqlCommand(action, npgSqlConnection);
-                NpgsqlDataReader npgSqlDataReader = npgSqlCommand.ExecuteReader();
-                if (npgSqlDataReader.HasRows)
-                {
-                    foreach (DbDataRecord dbDataRecord in npgSqlDataReader)
-                        facults.Add(new Facult()
-                        {
-                            Id = int.Parse(dbDataRecord["id"].ToString()),
-                            Name = dbDataRecord["namefacult"].ToString()
-                        });
-                }
-                return facults[0];
-
-            }
+            connectDB.WriteDateBase($"insert into facults(id,name) values('{facult.Id}{facult.Name}');");
         }
+
         public IActionResult Index()
         {
             return View();

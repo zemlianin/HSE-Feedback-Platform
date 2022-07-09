@@ -13,53 +13,19 @@ namespace APICommentBook.Controllers
         [HttpGet("Get-name-Courses")]
         public List<Course> GetNameCourses()
         {
-            List<Course> courses = new List<Course>();
-            String connectionString = "Server=postgres;Port=5432;User Id=app;Password=app;Database=mydbname2;";
-            //String connectionString = "Server=localhost;Port=5432;Database=mydbname;User Id=app;Password=app;";
-            using (NpgsqlConnection npgSqlConnection = new NpgsqlConnection(connectionString))
-            {
-                npgSqlConnection.Open();
-                // File.AppendAllText("log", "Соединение с БД открыто\n");
-                NpgsqlCommand npgSqlCommand = new NpgsqlCommand("SELECT * FROM courses", npgSqlConnection);
-                NpgsqlDataReader npgSqlDataReader = npgSqlCommand.ExecuteReader();
-                if (npgSqlDataReader.HasRows)
-                {
-                    foreach (DbDataRecord dbDataRecord in npgSqlDataReader)
-                        courses.Add(new Course()
-                        {
-                            Id = int.Parse(dbDataRecord["id"].ToString()),
-                            Name = dbDataRecord["name"].ToString()
-                        });
-                }
-                return courses;
-
-            }
+            return connectDB.ReadDateBasePartStudy<Course>("SELECT * FROM courses");
         }
-
-        private Course ReadDateBaseAboutCourse(string server, string port, string user, string password, string database, string action)
+        [HttpPost("write-course")]
+        public void SetWriteRecord([FromBody] Course course )
         {
-            List<Course> courses = new List<Course>();
-            //String connectionString = "Server=localhost;Port=5432;User Id=postgres;Password=1Q2w3e4r5t;Database=Courses;";
-            String connectionString = $"Server={server};Port={port};User Id={user};Password={password};Database={database};";
-            using (NpgsqlConnection npgSqlConnection = new NpgsqlConnection(connectionString))
-            {
-                npgSqlConnection.Open();
-                // File.AppendAllText("log", "Соединение с БД открыто\n");
-                NpgsqlCommand npgSqlCommand = new NpgsqlCommand(action, npgSqlConnection);
-                NpgsqlDataReader npgSqlDataReader = npgSqlCommand.ExecuteReader();
-                if (npgSqlDataReader.HasRows)
-                {
-                    foreach (DbDataRecord dbDataRecord in npgSqlDataReader)
-                        courses.Add(new Course()
-                        {
-                            Id = int.Parse(dbDataRecord["id"].ToString()),
-                            Name = dbDataRecord["namecourse"].ToString()
-                        });
-                }
-                return courses[0];
-
-            }
+            connectDB.WriteDateBase($"insert into courses(id,externalId,name) values({course.Id},{course.ExternalId},'{course.Name}');");
         }
+        [HttpPost("write-comment-course")]
+        public void SetWriteComment([FromBody] Comment comment)
+        {
+            connectDB.WriteDateBase($"insert into coursesComments values({comment.Id},'{comment.Name}','{comment.Time}','{comment.Text}',{comment.ExternalId});");
+        }
+
         public IActionResult Index()
         {
             return View();

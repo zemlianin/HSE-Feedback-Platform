@@ -7,6 +7,6 @@ namespace APICommentBook.Models
 {
     public class Facult : BaseClass
     {
-        public int FacultId { get; set; }
+        
     }
 }
