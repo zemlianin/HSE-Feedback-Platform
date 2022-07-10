@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Npgsql;
 using System.Data.Common;
 using APICommentBook.Models;
+using System.IO;
 namespace APICommentBook.Controllers
 {
     /// <summary>
@@ -22,37 +23,45 @@ namespace APICommentBook.Controllers
         internal static List<T> ReadDateBasePartStudy<T>(string command)
             where T : IStadyPart, new()
         {
-            List<T> list = new List<T>();
-            String connectionString = "Server=postgres;Port=5432;User Id=app;Password=app;Database=mydbname2;";
-            using (NpgsqlConnection npgSqlConnection = new NpgsqlConnection(connectionString))
+            try
             {
-                npgSqlConnection.Open();
-                NpgsqlCommand npgSqlCommand = new NpgsqlCommand(command, npgSqlConnection);
-                NpgsqlDataReader npgSqlDataReader = npgSqlCommand.ExecuteReader();
-                if (npgSqlDataReader.HasRows)
+                List<T> list = new List<T>();
+                String connectionString = "Server=postgres;Port=5432;User Id=app;Password=app;Database=mydbname2;";
+                using (NpgsqlConnection npgSqlConnection = new NpgsqlConnection(connectionString))
                 {
-                    foreach (DbDataRecord dbDataRecord in npgSqlDataReader)
+                    npgSqlConnection.Open();
+                    NpgsqlCommand npgSqlCommand = new NpgsqlCommand(command, npgSqlConnection);
+                    NpgsqlDataReader npgSqlDataReader = npgSqlCommand.ExecuteReader();
+                    if (npgSqlDataReader.HasRows)
                     {
-                        if (typeof(T) != typeof(Facult))
+                        foreach (DbDataRecord dbDataRecord in npgSqlDataReader)
                         {
-                            list.Add(new T()
+                            if (typeof(T) != typeof(Facult))
                             {
-                                Id = int.Parse(dbDataRecord["id"].ToString()),
-                                Name = dbDataRecord["name"].ToString(),
-                                ExternalId = int.Parse(dbDataRecord["externalId"].ToString())
-                            });
-                        }
-                        else
-                        {
-                            list.Add(new T()
+                                list.Add(new T()
+                                {
+                                    Id = int.Parse(dbDataRecord["id"].ToString()),
+                                    Name = dbDataRecord["name"].ToString(),
+                                    ExternalId = int.Parse(dbDataRecord["externalId"].ToString())
+                                });
+                            }
+                            else
                             {
-                                Id = int.Parse(dbDataRecord["id"].ToString()),
-                                Name = dbDataRecord["name"].ToString(),
-                            });
+                                list.Add(new T()
+                                {
+                                    Id = int.Parse(dbDataRecord["id"].ToString()),
+                                    Name = dbDataRecord["name"].ToString(),
+                                });
+                            }
                         }
                     }
+                    return list;
                 }
-                return list;
+            }
+            catch (Exception e)
+            {
+                File.AppendAllText("log.txt", e.Message+"\n");
+                return new List<T>();
             }
         }
         /// <summary>
@@ -61,30 +70,37 @@ namespace APICommentBook.Controllers
         /// <param name="command">команда для чтения</param>
         /// <returns></returns>
         internal static List<Comment> ReadDateBaseComment(string command)
-
         {
-            List<Comment> list = new List<Comment>();
-            String connectionString = "Server=postgres;Port=5432;User Id=app;Password=app;Database=mydbname2;";
-            using (NpgsqlConnection npgSqlConnection = new NpgsqlConnection(connectionString))
+            try
             {
-                npgSqlConnection.Open();
-                NpgsqlCommand npgSqlCommand = new NpgsqlCommand(command, npgSqlConnection);
-                NpgsqlDataReader npgSqlDataReader = npgSqlCommand.ExecuteReader();
-                if (npgSqlDataReader.HasRows)
+                List<Comment> list = new List<Comment>();
+                String connectionString = "Server=postgres;Port=5432;User Id=app;Password=app;Database=mydbname2;";
+                using (NpgsqlConnection npgSqlConnection = new NpgsqlConnection(connectionString))
                 {
-                    foreach (DbDataRecord dbDataRecord in npgSqlDataReader)
+                    npgSqlConnection.Open();
+                    NpgsqlCommand npgSqlCommand = new NpgsqlCommand(command, npgSqlConnection);
+                    NpgsqlDataReader npgSqlDataReader = npgSqlCommand.ExecuteReader();
+                    if (npgSqlDataReader.HasRows)
                     {
-                        list.Add(new Comment()
+                        foreach (DbDataRecord dbDataRecord in npgSqlDataReader)
                         {
-                            Id = int.Parse(dbDataRecord["id"].ToString()),
-                            Name = dbDataRecord["name"].ToString(),
-                            ExternalId = int.Parse(dbDataRecord["externalId"].ToString()),
-                            Time = dbDataRecord["time"].ToString(),
-                            Text = dbDataRecord["info"].ToString(),
-                        });
+                            list.Add(new Comment()
+                            {
+                                Id = int.Parse(dbDataRecord["id"].ToString()),
+                                Name = dbDataRecord["name"].ToString(),
+                                ExternalId = int.Parse(dbDataRecord["externalId"].ToString()),
+                                Time = dbDataRecord["time"].ToString(),
+                                Text = dbDataRecord["info"].ToString(),
+                            });
+                        }
                     }
+                    return list;
                 }
-                return list;
+            }
+            catch (Exception e)
+            {
+                File.AppendAllText("log.txt", e.Message + "\n");
+                return new List<Comment>();
             }
         }
 
@@ -104,9 +120,9 @@ namespace APICommentBook.Controllers
                     npgSqlCommand.ExecuteNonQuery();
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                //надо сделать логер
+                File.AppendAllText("log.txt", e.Message + "\n");
             }
         }
     }
