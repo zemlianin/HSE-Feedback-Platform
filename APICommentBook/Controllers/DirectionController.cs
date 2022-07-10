@@ -24,12 +24,18 @@ namespace APICommentBook.Controllers
         [HttpPost("write-directions")]
         public void SetWriteRecord([FromBody] Direction direction)
         {
-            connectDB.WriteDateBase($"insert into directions(id,externalId,name) values({direction.Id},{direction.ExternalId},'{direction.Name}');");
+            connectDB.RequestDateBase($"insert into directions(id,externalId,name) values({direction.Id},{direction.ExternalId},'{direction.Name}');");
         }
         [HttpPost("write-comment-direction")]
         public void SetWriteComment([FromBody] Comment comment)
         {
-            connectDB.WriteDateBase($"insert into directionComments values({comment.Id},'{comment.Name}','{comment.Time}','{comment.Text}',{comment.ExternalId});");
+            connectDB.RequestDateBase($"insert into directionComments values({comment.Id},'{comment.Name}','{comment.Time}','{comment.Text}',{comment.ExternalId});");
+        }
+
+        [HttpPost("delete-comment-direction")]
+        public void DeleteComment([FromBody] Comment comment)
+        {
+            connectDB.RequestDateBase($"DELETE FROM directionComments WHERE id = {comment.Id}; ");
         }
         public IActionResult Index()
         {

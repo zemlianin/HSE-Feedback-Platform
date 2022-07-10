@@ -18,17 +18,22 @@ namespace APICommentBook.Controllers
         [HttpGet("Get-comments-Courses")]
         public List<Comment> GetComments()
         {
-            return connectDB.ReadDateBaseComment("SELECT * FROM coursesComments");
+            return connectDB.ReadDateBaseComment($"SELECT * FROM coursesComments");
         }
         [HttpPost("write-course")]
         public void SetWriteRecord([FromBody] Course course )
         {
-            connectDB.WriteDateBase($"insert into courses(id,externalId,name) values({course.Id},{course.ExternalId},'{course.Name}');");
+            connectDB.RequestDateBase($"insert into courses(id,externalId,name) values({course.Id},{course.ExternalId},'{course.Name}');");
         }
         [HttpPost("write-comment-course")]
         public void SetWriteComment([FromBody] Comment comment)
         {
-            connectDB.WriteDateBase($"insert into coursesComments values({comment.Id},'{comment.Name}','{comment.Time}','{comment.Text}',{comment.ExternalId});");
+            connectDB.RequestDateBase($"insert into coursesComments values({comment.Id},'{comment.Name}','{comment.Time}','{comment.Text}',{comment.ExternalId});");
+        }
+        [HttpPost("delete-comment-course")]
+        public void DeleteComment([FromBody] Comment comment )
+        {
+            connectDB.RequestDateBase($"DELETE FROM coursesComments WHERE id = {comment.Id}; ");
         }
 
         public IActionResult Index()

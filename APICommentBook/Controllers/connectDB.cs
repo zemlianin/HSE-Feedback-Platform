@@ -79,8 +79,7 @@ namespace APICommentBook.Controllers
         }
 
 
-        internal static void WriteDateBase(string command)
-            
+        internal static void RequestDateBase(string command)   
         {
             try
             {
