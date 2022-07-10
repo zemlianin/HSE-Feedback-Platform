@@ -8,8 +8,17 @@ using System.Data.Common;
 using APICommentBook.Models;
 namespace APICommentBook.Controllers
 {
+    /// <summary>
+    /// класс который содержит в себе методы работы с бд и методы подключения к бд
+    /// </summary>
     public class connectDB
     {
+        /// <summary>
+        /// Чтение учебной подкгруппы(факультет курс направление)
+        /// </summary>
+        /// <typeparam name="T">Что это за подгруппа</typeparam>
+        /// <param name="command">комманда выполняемая с бд</param>
+        /// <returns></returns>
         internal static  List<T> ReadDateBasePartStudy<T>(string command)
             where T : IStadyPart, new()
         {
@@ -46,7 +55,11 @@ namespace APICommentBook.Controllers
                 return list;
             }
         }
-
+        /// <summary>
+        /// Чтение комментария из базы данных
+        /// </summary>
+        /// <param name="command">команда для чтения</param>
+        /// <returns></returns>
         internal static List<Comment> ReadDateBaseComment(string command)
            
         {
@@ -60,8 +73,7 @@ namespace APICommentBook.Controllers
                 if (npgSqlDataReader.HasRows)
                 {
                     foreach (DbDataRecord dbDataRecord in npgSqlDataReader)
-                    {
-                        
+                    {                        
                             list.Add(new Comment()
                             {
                                 Id = int.Parse(dbDataRecord["id"].ToString()),
@@ -69,16 +81,17 @@ namespace APICommentBook.Controllers
                                 ExternalId = int.Parse(dbDataRecord["externalId"].ToString()),
                                 Time = dbDataRecord["time"].ToString(),
                                 Text = dbDataRecord["info"].ToString(),
-                            });
-                        
-                        
+                            });                        
                     }
                 }
                 return list;
             }
         }
 
-
+        /// <summary>
+        /// Метод принимающий любые команды(используется для удаление и вписания комментариев)
+        /// </summary>
+        /// <param name="command">команда</param>
         internal static void RequestDateBase(string command)   
         {
             try
