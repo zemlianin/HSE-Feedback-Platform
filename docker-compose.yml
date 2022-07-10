@@ -32,4 +32,22 @@ services:
     restart: always
     networks:
         - "comment-book-network"
-
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4:5.7
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "detulie@mail.ru"
+      PGADMIN_DEFAULT_PASSWORD: "1Q2w3e4r5t"
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+    volumes:
+      - ./pgadmin:/var/lib/pgadmin
+    ports:
+      - "5050:80"
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 1G
+    networks:
+      - "comment-book-network"
