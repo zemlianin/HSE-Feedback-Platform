@@ -7,7 +7,7 @@
 Проект предназначен для упрощения поиска информации о курсах ВШЭ для студентов и абитурьентов. Данный микросервис выполняет задачу хранения отзывов и комментариев о различных курсах, а также дает возможность студентам добавлять свои отзывы 
 
 ## Технологии
- * [Web-Api ASP.NET Core](https://docs.microsoft.com/ru-ru/aspnet/web-api/)
+ * [Web-Api ASP.NET](https://docs.microsoft.com/ru-ru/aspnet/web-api/)
  * [Docker](https://www.docker.com/)
  * [docker-compose](https://docs.docker.com/compose/)
  * [PostgresSQL](https://www.postgresql.org/)
