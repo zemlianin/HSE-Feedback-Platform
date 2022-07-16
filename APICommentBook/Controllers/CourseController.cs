@@ -17,7 +17,7 @@ namespace APICommentBook.Controllers
         [HttpGet("Get-name-Courses")]
         public List<Course> GetNameCourses()
         {
-            return connectDB.ReadDateBasePartStudy<Course>("SELECT * FROM courses");
+            return ConnectDB.ReadDateBasePartStudy<Course>("SELECT * FROM courses");
         }
         /// <summary>
         /// Метод получения списка комментариев к курсам.
@@ -26,7 +26,7 @@ namespace APICommentBook.Controllers
         [HttpGet("Get-comments-Courses")]
         public List<Comment> GetComments()
         {
-            return connectDB.ReadDateBaseComment($"SELECT * FROM coursesComments");
+            return ConnectDB.ReadDateBaseComment($"SELECT * FROM coursesComments");
         }
         /// <summary>
         /// Метод добавления нового курса.
@@ -35,7 +35,7 @@ namespace APICommentBook.Controllers
         [HttpPost("write-course")]
         public void SetWriteRecord([FromBody] Course course)
         {
-            connectDB.RequestDateBase($"insert into courses(id,externalId,name) values({course.Id},{course.ExternalId},'{course.Name}');");
+            ConnectDB.RequestDateBase($"insert into courses(id,externalId,name) values({course.Id},{course.ExternalId},'{course.Name}');");
         }
         /// <summary>
         /// Метод добавления комментария к курсу.
@@ -44,7 +44,7 @@ namespace APICommentBook.Controllers
         [HttpPost("write-comment-course")]
         public void SetWriteComment([FromBody] Comment comment)
         {
-            connectDB.RequestDateBase($"insert into coursesComments values({comment.Id},'{comment.Name}','{comment.Time}','{comment.Text}',{comment.ExternalId});");
+            ConnectDB.RequestDateBase($"insert into coursesComments values({comment.Id},'{comment.Name}','{comment.Time}','{comment.Text}',{comment.ExternalId});");
         }
         /// <summary>
         /// метод удаления комментария
@@ -53,7 +53,7 @@ namespace APICommentBook.Controllers
         [HttpPost("delete-comment-course")]
         public void DeleteComment([FromBody] Comment comment)
         {
-            connectDB.RequestDateBase($"DELETE FROM coursesComments WHERE id = {comment.Id}; ");
+            ConnectDB.RequestDateBase($"DELETE FROM coursesComments WHERE id = {comment.Id}; ");
         }
 
         public IActionResult Index()

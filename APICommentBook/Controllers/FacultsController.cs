@@ -17,7 +17,7 @@ namespace APICommentBook.Controllers
         [HttpGet("Get-name-Facults")]
         public List<Facult> GetNameFacults()
         {
-            return connectDB.ReadDateBasePartStudy<Facult>("SELECT * FROM facultComments");
+            return ConnectDB.ReadDateBasePartStudy<Facult>("SELECT * FROM facultComments");
         }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace APICommentBook.Controllers
         [HttpGet("Get-comments-Facults")]
         public List<Comment> GetComments()
         {
-            return connectDB.ReadDateBaseComment("SELECT * FROM facultComments");
+            return ConnectDB.ReadDateBaseComment("SELECT * FROM facultComments");
         }
         /// <summary>
         /// Метод добавления нового факультета.
@@ -36,7 +36,7 @@ namespace APICommentBook.Controllers
         [HttpPost("write-facults")]
         public void SetWriteRecord([FromBody] Facult facult)
         {
-            connectDB.RequestDateBase($"insert into facults(id,name) values('{facult.Id}{facult.Name}');");
+            ConnectDB.RequestDateBase($"insert into facults(id,name) values('{facult.Id}{facult.Name}');");
         }
         /// <summary>
         /// Метод добавления комментария к факультету.
@@ -45,7 +45,7 @@ namespace APICommentBook.Controllers
         [HttpPost("write-comment-facults")]
         public void SetWriteComment([FromBody] Comment comment)
         {
-            connectDB.RequestDateBase($"insert into facultComments values({comment.Id},'{comment.Name}','{comment.Time}','{comment.Text}',{comment.ExternalId});");
+            ConnectDB.RequestDateBase($"insert into facultComments values({comment.Id},'{comment.Name}','{comment.Time}','{comment.Text}',{comment.ExternalId});");
         }
         /// <summary>
         /// метод удаления комментария
@@ -54,7 +54,7 @@ namespace APICommentBook.Controllers
         [HttpPost("delete-comment-facults")]
         public void DeleteComment([FromBody] Comment comment)
         {
-            connectDB.RequestDateBase($"DELETE FROM facultComments WHERE id = {comment.Id}; ");
+            ConnectDB.RequestDateBase($"DELETE FROM facultComments WHERE id = {comment.Id}; ");
         }
 
 

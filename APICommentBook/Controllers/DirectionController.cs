@@ -17,7 +17,7 @@ namespace APICommentBook.Controllers
         [HttpGet("Get-name-Directions")]
         public List<Direction> GetNameDirections()
         {
-            return connectDB.ReadDateBasePartStudy<Direction>("SELECT * FROM directions");
+            return ConnectDB.ReadDateBasePartStudy<Direction>("SELECT * FROM directions");
         }
         /// <summary>
         /// Вывод списка комментариев
@@ -26,7 +26,7 @@ namespace APICommentBook.Controllers
         [HttpGet("Get-comments-Directions")]
         public List<Comment> GetComments()
         {
-            return connectDB.ReadDateBaseComment("SELECT * FROM directionComments");
+            return ConnectDB.ReadDateBaseComment("SELECT * FROM directionComments");
         }
         /// <summary>
         /// Метод добавления направления.
@@ -35,7 +35,7 @@ namespace APICommentBook.Controllers
         [HttpPost("write-directions")]
         public void SetWriteRecord([FromBody] Direction direction)
         {
-            connectDB.RequestDateBase($"insert into directions(id,externalId,name) values({direction.Id},{direction.ExternalId},'{direction.Name}');");
+            ConnectDB.RequestDateBase($"insert into directions(id,externalId,name) values({direction.Id},{direction.ExternalId},'{direction.Name}');");
         }
         /// <summary>
         /// Метод добавления комментария к направлению.
@@ -44,7 +44,7 @@ namespace APICommentBook.Controllers
         [HttpPost("write-comment-direction")]
         public void SetWriteComment([FromBody] Comment comment)
         {
-            connectDB.RequestDateBase($"insert into directionComments values({comment.Id},'{comment.Name}','{comment.Time}','{comment.Text}',{comment.ExternalId});");
+            ConnectDB.RequestDateBase($"insert into directionComments values({comment.Id},'{comment.Name}','{comment.Time}','{comment.Text}',{comment.ExternalId});");
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace APICommentBook.Controllers
         [HttpPost("delete-comment-direction")]
         public void DeleteComment([FromBody] Comment comment)
         {
-            connectDB.RequestDateBase($"DELETE FROM directionComments WHERE id = {comment.Id}; ");
+            ConnectDB.RequestDateBase($"DELETE FROM directionComments WHERE id = {comment.Id}; ");
         }
         public IActionResult Index()
         {
