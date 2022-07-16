@@ -17,9 +17,19 @@ namespace WebAppCommentBook.Pages
             _logger = logger;
         }
 
+
         public async Task OnGet()
         {
-          
+            ViewData["Message"] = "Hello from webfrontend";
+            using (var client = new System.Net.Http.HttpClient())
+            {
+                // Call *mywebapi*, and display its response in the page
+                var request = new System.Net.Http.HttpRequestMessage();
+                request.RequestUri = new Uri("http://APICommentBook/Get-name-Courses");
+                // request.RequestUri = new Uri("http://mywebapi/api/values/1"); // For ASP.NET 2.x, comment out previous line and uncomment this line.
+                var response = await client.SendAsync(request);
+                ViewData["Message"] += " and " + await response.Content.ReadAsStringAsync();
+            }
         }
     }
 }
