@@ -12,8 +12,9 @@ namespace APICommentBook.Controllers
     /// <summary>
     /// класс который содержит в себе методы работы с бд и методы подключения к бд
     /// </summary>
-    public class connectDB
+    public class ConnectDB
     {
+        static internal Logger logger = new Logger("log.txt");
         /// <summary>
         /// Чтение учебной подкгруппы(факультет курс направление)
         /// </summary>
@@ -60,7 +61,7 @@ namespace APICommentBook.Controllers
             }
             catch (Exception e)
             {
-                File.AppendAllText("log.txt", e.Message+"\n");
+                ConnectDB.logger.LogInformation(e.Message + "\n");
                 return new List<T>();
             }
         }
@@ -99,7 +100,7 @@ namespace APICommentBook.Controllers
             }
             catch (Exception e)
             {
-                File.AppendAllText("log.txt", e.Message + "\n");
+                ConnectDB.logger.LogInformation(e.Message + "\n");
                 return new List<Comment>();
             }
         }
@@ -122,7 +123,7 @@ namespace APICommentBook.Controllers
             }
             catch (Exception e)
             {
-                File.AppendAllText("log.txt", e.Message + "\n");
+                ConnectDB.logger.LogInformation(e.Message + "\n");
             }
         }
     }

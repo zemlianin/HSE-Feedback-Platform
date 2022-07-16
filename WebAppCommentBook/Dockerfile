@@ -6,16 +6,16 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ["APICommentBook/APICommentBook.csproj", "APICommentBook/"]
-RUN dotnet restore "APICommentBook/APICommentBook.csproj"
+COPY ["WebAppCommentBook/WebAppCommentBook.csproj", "WebAppCommentBook/"]
+RUN dotnet restore "WebAppCommentBook/WebAppCommentBook.csproj"
 COPY . .
-WORKDIR "/src/APICommentBook"
-RUN dotnet build "APICommentBook.csproj" -c Release -o /app/build
+WORKDIR "/src/WebAppCommentBook"
+RUN dotnet build "WebAppCommentBook.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "APICommentBook.csproj" -c Release -o /app/publish
+RUN dotnet publish "WebAppCommentBook.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "APICommentBook.dll"]
+ENTRYPOINT ["dotnet", "WebAppCommentBook.dll"]

@@ -5,6 +5,7 @@ networks:
     driver: bridge
 
 services:
+
   apicommentbook:
     image: ${DOCKER_REGISTRY-}apicommentbook
     depends_on:
@@ -13,11 +14,23 @@ services:
       context: .
       dockerfile: APICommentBook/Dockerfile
     ports:
-        - "8000:80"
-   # environment:
-    #DB_CONNECTION_STRING: "host="
+        - "8000:30858"
     networks:
         - "comment-book-network"
+
+  webappcommentbook:
+    image: ${DOCKER_REGISTRY-}webappcommentbook
+    depends_on:
+        - "apicommentbook"
+    build:
+      context: .
+      dockerfile: WebAppCommentBook/Dockerfile
+    ports:
+        - "8010:80"
+    networks:
+        - "comment-book-network"
+
+
   postgres:
     image: postgres
     environment:
@@ -51,3 +64,4 @@ services:
           memory: 1G
     networks:
       - "comment-book-network"
+
