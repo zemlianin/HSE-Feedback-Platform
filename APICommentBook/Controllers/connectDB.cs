@@ -26,6 +26,7 @@ namespace APICommentBook.Controllers
         {
             try
             {
+                ConnectDB.logger.LogInformation("____tgf" + "\n");
                 List<T> list = new List<T>();
                 String connectionString = "Server=postgres;Port=5432;User Id=app;Password=app;Database=mydbname2;";
                 using (NpgsqlConnection npgSqlConnection = new NpgsqlConnection(connectionString))

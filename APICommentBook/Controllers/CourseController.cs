@@ -19,6 +19,12 @@ namespace APICommentBook.Controllers
         {
             return ConnectDB.ReadDateBasePartStudy<Course>("SELECT * FROM courses");
         }
+
+        [HttpGet("Get-name-Courses-by-id")]
+        public List<Course> GetNameCoursesById( int id)
+        {
+            return ConnectDB.ReadDateBasePartStudy<Course>($"SELECT * FROM courses WHERE id = {id};");
+        }
         /// <summary>
         /// Метод получения списка комментариев к курсам.
         /// </summary>

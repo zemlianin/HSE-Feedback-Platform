@@ -19,6 +19,12 @@ namespace APICommentBook.Controllers
         {
             return ConnectDB.ReadDateBasePartStudy<Direction>("SELECT * FROM directions");
         }
+
+        [HttpGet("Get-name-Directions-by-id")]
+        public List<Direction> GetNameDirectionsById(int id)
+        {
+            return ConnectDB.ReadDateBasePartStudy<Direction>($"SELECT * FROM directions WHERE id = {id};");
+        }
         /// <summary>
         /// Вывод списка комментариев
         /// </summary>
