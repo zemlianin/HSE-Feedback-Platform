@@ -17,7 +17,14 @@ namespace APICommentBook.Controllers
         [HttpGet("Get-name-Facults")]
         public List<Facult> GetNameFacults()
         {
-            return ConnectDB.ReadDateBasePartStudy<Facult>("SELECT * FROM facultComments");
+            return ConnectDB.ReadDateBasePartStudy<Facult>("SELECT * FROM facults");
+        }
+
+
+        [HttpGet("Get-name-Facults-by-id")]
+        public List<Facult> GetNameFacultsById(int id)
+        {
+            return ConnectDB.ReadDateBasePartStudy<Facult>($"SELECT * FROM facults WHERE id = {id};");
         }
 
         /// <summary>

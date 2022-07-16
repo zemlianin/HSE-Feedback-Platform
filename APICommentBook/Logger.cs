@@ -11,7 +11,7 @@ namespace APICommentBook {
 
         public void LogInformation(string information)
         {
-            _writer.WriteAsync(information);
+            _writer.Write(information);
         }
         ~Logger() {
             _writer.Dispose();
