@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APICommentBook", "APICommentBook\APICommentBook.csproj", "{1E981D52-A081-4499-9E5E-D0A651EB5A62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAppCommentBook", "WebAppCommentBook\WebAppCommentBook.csproj", "{FDD0DA84-470F-44BA-A14C-F1AF742B359F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAppCommentBook", "WebAppCommentBook\WebAppCommentBook.csproj", "{FDD0DA84-470F-44BA-A14C-F1AF742B359F}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{B2EB878D-2602-452E-9EA2-303E9A6002EA}"
 EndProject
