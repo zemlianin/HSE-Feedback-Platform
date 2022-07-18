@@ -1,4 +1,4 @@
-﻿@page
+﻿@page 
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
@@ -7,24 +7,27 @@
     var facults = ((List<APICommentBook.Models.BaseClass>)ViewData["Facults"]);
 }
 
-    <p>
-        @foreach (var x in facults)
-        {
-            <div class="gorizontal-line" style="float: left; margin-right: 2%; margin-top: 2% ">
-                <div class="card" style="width: 18rem;">
+<p>
+    @foreach (var x in facults)
+    {
+        <div class="gorizontal-line" style="float: left; margin-right: 2%; margin-top: 2% ">
+            <div class="card" style="width: 18rem;">
 
-                    <div class="card-body">
-                        @{var name = x.name;}
-                        <h5 class="card-title">@name</h5>
-                        <p class="card-text">
+                <div class="card-body">
+                    @{
+                        var name = x.name;
+                        var id = x.id;
+                        }
+                    <h5 class="card-title">@name</h5>
+                    <p class="card-text">
 
-                        </p>
-                        <a href="#" class="card-link">Список направлений</a>
-                    </div>
-
+                    </p>
+                    <a href="http://localhost:64733/Directions/@id" class="card-link">Список направлений</a>
                 </div>
-            </div>
-        }
-    </p>
 
-    
+            </div>
+        </div>
+    }
+</p>
+
+
