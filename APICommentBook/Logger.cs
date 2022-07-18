@@ -12,6 +12,7 @@ namespace APICommentBook {
         public void LogInformation(string information)
         {
             _writer.Write(information);
+           // _writer.Flush();
         }
         ~Logger() {
             _writer.Dispose();
