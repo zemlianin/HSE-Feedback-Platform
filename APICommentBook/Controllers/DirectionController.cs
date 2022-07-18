@@ -41,7 +41,7 @@ namespace APICommentBook.Controllers
         [HttpPost("write-directions")]
         public void SetWriteRecord([FromBody] Direction direction)
         {
-            ConnectDB.RequestDateBase($"insert into directions(id,externalId,name) values({direction.Id},{direction.ExternalId},'{direction.Name}');");
+            ConnectDB.RequestDateBase($"insert into directions(id,externalId,name) values({direction.id},{direction.externalId},'{direction.name}');");
         }
         /// <summary>
         /// Метод добавления комментария к направлению.

@@ -7,8 +7,8 @@ namespace APICommentBook.Models
 {
     interface IStudyPart
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public int ExternalId { get; set; }
+        public int id { get; set; }
+        public string name { get; set; }
+        public int externalId { get; set; }
     }
 }

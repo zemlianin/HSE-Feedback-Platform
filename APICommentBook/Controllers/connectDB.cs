@@ -22,7 +22,7 @@ namespace APICommentBook.Controllers
         /// <param name="command">комманда выполняемая с бд</param>
         /// <returns></returns>
         internal static List<T> ReadDateBasePartStudy<T>(string command)
-            where T : IStadyPart, new()
+            where T : IStudyPart, new()
         {
             try
             {
@@ -42,17 +42,17 @@ namespace APICommentBook.Controllers
                             {
                                 list.Add(new T()
                                 {
-                                    Id = int.Parse(dbDataRecord["id"].ToString()),
-                                    Name = dbDataRecord["name"].ToString(),
-                                    ExternalId = int.Parse(dbDataRecord["externalId"].ToString())
+                                    id = int.Parse(dbDataRecord["id"].ToString()),
+                                    name = dbDataRecord["name"].ToString(),
+                                    externalId = int.Parse(dbDataRecord["externalId"].ToString())
                                 });
                             }
                             else
                             {
                                 list.Add(new T()
                                 {
-                                    Id = int.Parse(dbDataRecord["id"].ToString()),
-                                    Name = dbDataRecord["name"].ToString(),
+                                    id = int.Parse(dbDataRecord["id"].ToString()),
+                                    name = dbDataRecord["name"].ToString(),
                                 });
                             }
                         }

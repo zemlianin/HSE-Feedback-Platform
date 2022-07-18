@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Text.Json;
+using APICommentBook.Models;
 
 namespace WebAppCommentBook.Pages
 {
@@ -20,16 +22,12 @@ namespace WebAppCommentBook.Pages
 
         public async Task OnGet()
         {
-            ViewData["Message"] = "Hello from webfrontend";
-            using (var client = new System.Net.Http.HttpClient())
-            {
-                // Call *mywebapi*, and display its response in the page
-                var request = new System.Net.Http.HttpRequestMessage();
-                request.RequestUri = new Uri("http://APICommentBook/Get-name-Courses");
-                // request.RequestUri = new Uri("http://mywebapi/api/values/1"); // For ASP.NET 2.x, comment out previous line and uncomment this line.
-                var response = await client.SendAsync(request);
-                ViewData["Message"] += " and " + await response.Content.ReadAsStringAsync();
-            }
+            var request = new RequestSender();
+
+            ViewData["Facults"] = JsonSerializer.Deserialize<List<BaseClass>>(request.Get("http://APICommentBook/Get-name-Facults").Result);
+
+
+           
         }
     }
 }
