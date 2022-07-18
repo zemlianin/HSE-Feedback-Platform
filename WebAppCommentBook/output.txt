@@ -1,0 +1,1 @@
+[{"id":1,"name":"ФКН","externalId":0},{"id":2,"name":"ФГН","externalId":0},{"id":3,"name":"МИЭМ","externalId":0},{"id":4,"name":"ФЭН","externalId":0}]

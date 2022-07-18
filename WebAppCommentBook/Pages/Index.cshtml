@@ -5,7 +5,15 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    <p>@ViewData["Message"]</p>
+    <h1 class="display-4">ВШЭ Наизнанку</h1>
+    <p><div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Заголовок карточки</h5>
+    <h6 class="card-subtitle mb-2 text-muted">Подзаголовок карточки</h6>
+    <p class="card-text">Небольшой пример текста, который должен основываться на названии карты и составлять основную часть содержимого карты.</p>
+    <a href="#" class="card-link">Ссылка карточки</a>
+    <a href="#" class="card-link">Другая ссылка</a>
+  </div>
+</div></p>
+    <p>@ViewData["Message"].ToString()</p>
 </div>
