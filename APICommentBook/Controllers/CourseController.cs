@@ -41,7 +41,7 @@ namespace APICommentBook.Controllers
         [HttpPost("write-course")]
         public void SetWriteRecord([FromBody] Course course)
         {
-            ConnectDB.RequestDateBase($"insert into courses(id,externalId,name) values({course.Id},{course.ExternalId},'{course.Name}');");
+            ConnectDB.RequestDateBase($"insert into courses(id,externalId,name) values({course.id},{course.externalId},'{course.name}');");
         }
         /// <summary>
         /// Метод добавления комментария к курсу.

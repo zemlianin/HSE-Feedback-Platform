@@ -43,7 +43,7 @@ namespace APICommentBook.Controllers
         [HttpPost("write-facults")]
         public void SetWriteRecord([FromBody] Facult facult)
         {
-            ConnectDB.RequestDateBase($"insert into facults(id,name) values('{facult.Id}{facult.Name}');");
+            ConnectDB.RequestDateBase($"insert into facults(id,name) values('{facult.id}{facult.name}');");
         }
         /// <summary>
         /// Метод добавления комментария к факультету.

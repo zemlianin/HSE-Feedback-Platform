@@ -1,10 +1,10 @@
 ﻿namespace APICommentBook.Models
 {
-    public class BaseClass : IStadyPart
+    public class BaseClass : IStudyPart
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        public int id { get; set; }
+        public string name { get; set; }
         //айди родителя(для направления это факультет)
-        public int ExternalId { get; set; }
+        public int externalId { get; set; }
     }
 }

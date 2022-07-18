@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Text.Json;
 using APICommentBook.Models;
+using System.IO;
 
 namespace WebAppCommentBook.Pages
 {
@@ -13,10 +14,10 @@ namespace WebAppCommentBook.Pages
     {
         public  void OnGet()
         {
-
-            var request = new RequestSender();
+           
+             var request = new RequestSender();
+           
             ViewData["Facults"] = JsonSerializer.Deserialize<List<BaseClass>>(request.Get("http://APICommentBook/Get-name-Facults").Result);
-            
         }
     }
 }
