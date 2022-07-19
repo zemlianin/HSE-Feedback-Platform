@@ -29,10 +29,10 @@ namespace APICommentBook.Controllers
         /// Вывод списка комментариев
         /// </summary>
         /// <returns></returns>
-        [HttpGet("Get-comments-Directions")]
-        public List<Comment> GetComments()
+        [HttpGet("Get-comments-Directions-by-externalId")]
+        public List<Comment> GetComments(int externalId)
         {
-            return ConnectDB.ReadDateBaseComment("SELECT * FROM directionComments");
+            return ConnectDB.ReadDateBaseComment($"SELECT * FROM directionComments WHERE externalId = {externalId};");
         }
         /// <summary>
         /// Метод добавления направления.
@@ -48,7 +48,7 @@ namespace APICommentBook.Controllers
         /// </summary>
         /// <param name="comment">объект комментария, который будет добавлен в бд</param>
         [HttpPost("write-comment-direction")]
-        public void SetWriteComment([FromBody] Comment comment)
+        public void SetWriteComment( Comment comment)
         {
             ConnectDB.RequestDateBase($"insert into directionComments values({comment.id},'{comment.name}','{comment.time}','{comment.text}',{comment.externalId});");
         }

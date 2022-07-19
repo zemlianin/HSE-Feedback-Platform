@@ -31,10 +31,10 @@ namespace APICommentBook.Controllers
         /// получение списка комментариев к факультетам
         /// </summary>
         /// <returns></returns>
-        [HttpGet("Get-comments-Facults")]
-        public List<Comment> GetComments()
+        [HttpGet("Get-comments-Facults-by-externalId")]
+        public List<Comment> GetComments(int externalId)
         {
-            return ConnectDB.ReadDateBaseComment("SELECT * FROM facultComments");
+            return ConnectDB.ReadDateBaseComment($"SELECT * FROM facultComments WHERE externalId = {externalId};");
         }
         /// <summary>
         /// Метод добавления нового факультета.
@@ -50,7 +50,7 @@ namespace APICommentBook.Controllers
         /// </summary>
         /// <param name="comment">объект комментария, который будет добавлен в бд</param>
         [HttpPost("write-comment-facults")]
-        public void SetWriteComment([FromBody] Comment comment)
+        public void SetWriteComment( Comment comment)
         {
             ConnectDB.RequestDateBase($"insert into facultComments values({comment.id},'{comment.name}','{comment.time}','{comment.text}',{comment.externalId});");
         }
