@@ -10,17 +10,54 @@ namespace APICommentBook.Controllers
 {
     public class FacultsController : Controller
     {
+        /// <summary>
+        /// получение списка факультетов.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("Get-name-Facults")]
         public List<Facult> GetNameFacults()
         {
-            return connectDB.ReadDateBasePartStudy<Facult>("SELECT * FROM facults");
+            return connectDB.ReadDateBasePartStudy<Facult>("SELECT * FROM facultComments");
         }
 
+        /// <summary>
+        /// получение списка комментариев к факультетам
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("Get-comments-Facults")]
+        public List<Comment> GetComments()
+        {
+            return connectDB.ReadDateBaseComment("SELECT * FROM facultComments");
+        }
+        /// <summary>
+        /// Метод добавления нового факультета.
+        /// </summary>
+        /// <param name="facult">объект факультета</param>
         [HttpPost("write-facults")]
         public void SetWriteRecord([FromBody] Facult facult)
         {
-            connectDB.WriteDateBase($"insert into facults(id,name) values('{facult.Id}{facult.Name}');");
+            connectDB.RequestDateBase($"insert into facults(id,name) values('{facult.Id}{facult.Name}');");
         }
+        /// <summary>
+        /// Метод добавления комментария к факультету.
+        /// </summary>
+        /// <param name="comment">объект комментария, который будет добавлен в бд</param>
+        [HttpPost("write-comment-facults")]
+        public void SetWriteComment([FromBody] Comment comment)
+        {
+            connectDB.RequestDateBase($"insert into facultComments values({comment.Id},'{comment.Name}','{comment.Time}','{comment.Text}',{comment.ExternalId});");
+        }
+        /// <summary>
+        /// метод удаления комментария
+        /// </summary>
+        /// <param name="comment">объект комментария который подлежит удалению(сравнивается только id)</param>
+        [HttpPost("delete-comment-facults")]
+        public void DeleteComment([FromBody] Comment comment)
+        {
+            connectDB.RequestDateBase($"DELETE FROM facultComments WHERE id = {comment.Id}; ");
+        }
+
+
 
         public IActionResult Index()
         {
