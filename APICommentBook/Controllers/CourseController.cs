@@ -29,10 +29,10 @@ namespace APICommentBook.Controllers
         /// Метод получения списка комментариев к курсам.
         /// </summary>
         /// <returns></returns>
-        [HttpGet("Get-comments-Courses")]
-        public List<Comment> GetComments()
+        [HttpGet("Get-comments-Courses-by-externalId")]
+        public List<Comment> GetComments(int externalId)
         {
-            return ConnectDB.ReadDateBaseComment($"SELECT * FROM coursesComments");
+            return ConnectDB.ReadDateBaseComment($"SELECT * FROM coursesComments WHERE externalId = {externalId};");
         }
         /// <summary>
         /// Метод добавления нового курса.
@@ -48,8 +48,9 @@ namespace APICommentBook.Controllers
         /// </summary>
         /// <param name="comment">объект комментария, который будет добавлен в бд</param>
         [HttpPost("write-comment-course")]
-        public void SetWriteComment([FromBody] Comment comment)
+        public void SetWriteComment(Comment comment)
         {
+           // System.IO.File.WriteAllText("output.txt", $"-{comment.id}");
             ConnectDB.RequestDateBase($"insert into coursesComments values({comment.id},'{comment.name}','{comment.time}','{comment.text}',{comment.externalId});");
         }
         /// <summary>

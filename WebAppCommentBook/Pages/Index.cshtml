@@ -1,4 +1,5 @@
-﻿@page 
+﻿@page
+
 @model IndexModel
 @{
     ViewData["Title"] = "Facults HSE";
@@ -9,6 +10,7 @@
 
 <p>
     <h1>Факультеты ВШЭ</h1>
+
     @foreach (var x in facults)
     {
         <div class="gorizontal-line" style="float: left; margin-right: 2%; margin-top: 2% ">
@@ -18,7 +20,7 @@
                     @{
                         var name = x.name;
                         var id = x.id;
-                        }
+                    }
                     <h5 class="card-title">@name</h5>
                     <p class="card-text">
 
