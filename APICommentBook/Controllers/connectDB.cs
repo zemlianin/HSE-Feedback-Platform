@@ -127,7 +127,6 @@ namespace APICommentBook.Controllers
             {
                 ConnectDB.logger.LogInformation(e.Message + "\n");
                 File.WriteAllText("output.txt", "лажа");
-                throw;
             }
         }
     }

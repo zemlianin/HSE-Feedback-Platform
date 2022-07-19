@@ -5,23 +5,21 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace WebAppCommentBook
 {
     public class RequestSender
     {
         private static HttpClient _CLIENT;
-        private static HttpRequestMessage request;
+       
         public RequestSender()
         {
             if (_CLIENT == null)
             {
                 _CLIENT = new HttpClient();
             }
-            if (request == null)
-            {
-                request = new HttpRequestMessage();
-            }
+            
         }
 
        public async Task<string> Get(string path)
@@ -34,12 +32,26 @@ namespace WebAppCommentBook
             return response;
         }
 
-        public async void Post(string path)
+        public async void Post(string path, string jObject)
         {
-            
-            request.RequestUri = new Uri(path);
+            string json = JsonConvert.SerializeObject(1);
+            HttpContent content = new StringContent(json);
 
-            var response = await _CLIENT.SendAsync(request);
+            
+            HttpResponseMessage response = await _CLIENT.PostAsync(path, content);      
+            
+          //  File.WriteAllText("output.txt", request.RequestUri.ToString()+" 1");
+        }
+        public async void PostWithBody(string path,string jObject)
+        {
+            // var content = new FormUrlEncodedContent(values);
+            var content = new StringContent(jObject.ToString());
+
+            var response = await _CLIENT.PostAsync(path, content);
+
+        //    var responseString = await response.Content.ReadAsStringAsync();
+              File.WriteAllText("output.txt", " 1");
+       //     var response = _CLIENT.SendAsync(request);
         }
     }
 }
