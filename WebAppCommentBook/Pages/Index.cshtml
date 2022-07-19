@@ -1,13 +1,14 @@
 ﻿@page 
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Facults HSE";
 }
 @{
     var facults = ((List<APICommentBook.Models.BaseClass>)ViewData["Facults"]);
 }
 
 <p>
+    <h1>Факультеты ВШЭ</h1>
     @foreach (var x in facults)
     {
         <div class="gorizontal-line" style="float: left; margin-right: 2%; margin-top: 2% ">
@@ -22,7 +23,7 @@
                     <p class="card-text">
 
                     </p>
-                    <a href="/Directions/@id" class="card-link">Список направлений</a>
+                    <a href="/Directions/@id/@name" class="card-link">Список направлений</a>
                 </div>
 
             </div>
