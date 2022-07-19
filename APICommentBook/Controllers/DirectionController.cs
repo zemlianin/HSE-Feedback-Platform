@@ -50,7 +50,7 @@ namespace APICommentBook.Controllers
         [HttpPost("write-comment-direction")]
         public void SetWriteComment([FromBody] Comment comment)
         {
-            ConnectDB.RequestDateBase($"insert into directionComments values({comment.Id},'{comment.Name}','{comment.Time}','{comment.Text}',{comment.ExternalId});");
+            ConnectDB.RequestDateBase($"insert into directionComments values({comment.id},'{comment.name}','{comment.time}','{comment.text}',{comment.externalId});");
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace APICommentBook.Controllers
         [HttpPost("delete-comment-direction")]
         public void DeleteComment([FromBody] Comment comment)
         {
-            ConnectDB.RequestDateBase($"DELETE FROM directionComments WHERE id = {comment.Id}; ");
+            ConnectDB.RequestDateBase($"DELETE FROM directionComments WHERE id = {comment.id}; ");
         }
         public IActionResult Index()
         {

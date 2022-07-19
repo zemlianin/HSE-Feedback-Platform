@@ -2,14 +2,14 @@
 {
     public class Comment
     {
-        public int Id { get; set; }
+        public int id { get; set; }
         //Имя пользователя.
-        public string Name { get; set; }
+        public string name { get; set; }
         //Айди элемента к которому коментарий.
-        public int ExternalId { get; set; }
+        public int externalId { get; set; }
         //Время оставления комментария
-        public string Time { get; set; }
+        public string time { get; set; }
         //Содержимое
-        public string Text { get; set; }
+        public string text { get; set; }
     }
 }

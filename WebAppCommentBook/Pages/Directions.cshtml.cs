@@ -25,5 +25,6 @@ namespace WebAppCommentBook.Pages
                 request.Get($"http://APICommentBook/Get-name-Directions-by-externalId?externalId="+externalId).Result);
          //  System.IO.File.WriteAllText("output.txt", externalId.ToString());
         }
+      
     }
 }

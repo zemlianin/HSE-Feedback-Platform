@@ -1,1 +1,1 @@
-[{"id":1,"name":"Программирование на C#","externalId":1},{"id":2,"name":"Экономика","externalId":1},{"id":3,"name":"Алгебра","externalId":1},{"id":4,"name":"Математический анализ","externalId":1},{"id":5,"name":"Основы программирования на c++","externalId":1}]
+   

@@ -52,7 +52,7 @@ namespace APICommentBook.Controllers
         [HttpPost("write-comment-facults")]
         public void SetWriteComment([FromBody] Comment comment)
         {
-            ConnectDB.RequestDateBase($"insert into facultComments values({comment.Id},'{comment.Name}','{comment.Time}','{comment.Text}',{comment.ExternalId});");
+            ConnectDB.RequestDateBase($"insert into facultComments values({comment.id},'{comment.name}','{comment.time}','{comment.text}',{comment.externalId});");
         }
         /// <summary>
         /// метод удаления комментария
@@ -61,7 +61,7 @@ namespace APICommentBook.Controllers
         [HttpPost("delete-comment-facults")]
         public void DeleteComment([FromBody] Comment comment)
         {
-            ConnectDB.RequestDateBase($"DELETE FROM facultComments WHERE id = {comment.Id}; ");
+            ConnectDB.RequestDateBase($"DELETE FROM facultComments WHERE id = {comment.id}; ");
         }
 
 
