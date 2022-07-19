@@ -50,7 +50,7 @@ namespace APICommentBook.Controllers
         [HttpPost("write-comment-course")]
         public void SetWriteComment([FromBody] Comment comment)
         {
-            ConnectDB.RequestDateBase($"insert into coursesComments values({comment.Id},'{comment.Name}','{comment.Time}','{comment.Text}',{comment.ExternalId});");
+            ConnectDB.RequestDateBase($"insert into coursesComments values({comment.id},'{comment.name}','{comment.time}','{comment.text}',{comment.externalId});");
         }
         /// <summary>
         /// метод удаления комментария
@@ -59,7 +59,7 @@ namespace APICommentBook.Controllers
         [HttpPost("delete-comment-course")]
         public void DeleteComment([FromBody] Comment comment)
         {
-            ConnectDB.RequestDateBase($"DELETE FROM coursesComments WHERE id = {comment.Id}; ");
+            ConnectDB.RequestDateBase($"DELETE FROM coursesComments WHERE id = {comment.id}; ");
         }
 
         public IActionResult Index()

@@ -88,11 +88,11 @@ namespace APICommentBook.Controllers
                         {
                             list.Add(new Comment()
                             {
-                                Id = int.Parse(dbDataRecord["id"].ToString()),
-                                Name = dbDataRecord["name"].ToString(),
-                                ExternalId = int.Parse(dbDataRecord["externalId"].ToString()),
-                                Time = dbDataRecord["time"].ToString(),
-                                Text = dbDataRecord["info"].ToString(),
+                                id = int.Parse(dbDataRecord["id"].ToString()),
+                                name = dbDataRecord["name"].ToString(),
+                                externalId = int.Parse(dbDataRecord["externalId"].ToString()),
+                                time = dbDataRecord["time"].ToString(),
+                                text = dbDataRecord["info"].ToString(),
                             });
                         }
                     }
@@ -103,6 +103,7 @@ namespace APICommentBook.Controllers
             {
                 ConnectDB.logger.LogInformation(e.Message + "\n");
                 return new List<Comment>();
+                throw;
             }
         }
 
@@ -125,6 +126,8 @@ namespace APICommentBook.Controllers
             catch (Exception e)
             {
                 ConnectDB.logger.LogInformation(e.Message + "\n");
+                File.WriteAllText("output.txt", "лажа");
+                throw;
             }
         }
     }

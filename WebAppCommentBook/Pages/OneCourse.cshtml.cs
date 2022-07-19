@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace WebAppCommentBook.Pages
 {
+    
     public class OneCourseModel : PageModel
     {
         public int externalId { get; set; }
@@ -16,13 +17,18 @@ namespace WebAppCommentBook.Pages
         public string name { get; set; }
         public void OnGet(int externalId, string name)
         {
+           // System.IO.File.WriteAllText("output.txt", "111111111111111111");
             this.name = name;
             this.externalId = externalId;
-            /*var request = new RequestSender();
+            var request = new RequestSender();
 
-            ViewData["Courses"] = JsonSerializer.Deserialize<List<BaseClass>>(
-                request.Get($"http://APICommentBook/Get-name-Courses-by-externalId?externalId=" + this.externalId).Result);
-            //System.IO.File.WriteAllText("output.txt", request.Get($"http://APICommentBook/Get-name-Courses-by-externalId?externalId=" + this.externalId).Result);*/
+            ViewData["CommentsCourse"] = JsonSerializer.Deserialize<List<Comment>>(
+                request.Get($"http://APICommentBook/Get-comments-Courses").Result);
+            //System.IO.File.WriteAllText("output.txt", request.Get($"http://APICommentBook/Get-name-Courses-by-externalId?externalId=" + this.externalId).Result);
+        }
+        public void OnPost(string msg, string name, string email)
+        {
+            System.IO.File.WriteAllText("output.txt", msg + " " + name + "  " + email);
         }
     }
 }

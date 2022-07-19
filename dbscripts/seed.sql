@@ -13,8 +13,8 @@ CREATE TABLE facultComments
 	name text,
 	time text,
     info text,
-	facultId int,
-    FOREIGN KEY (facultId) REFERENCES facults (id)
+	externalId int,
+    FOREIGN KEY (externalId) REFERENCES facults (id)
 );
 
 CREATE TABLE directions
@@ -31,8 +31,8 @@ CREATE TABLE directionComments
 	name text,
 	time text,
     info text,
-    directionId int,   
-    FOREIGN KEY (directionId) REFERENCES directions (id)
+    externalId int,  
+    FOREIGN KEY (externalId) REFERENCES directions (id)
 );
 
 
@@ -50,8 +50,8 @@ CREATE TABLE coursesComments
 	name text,
 	time text,
     info text,
-    courseId int,
-    FOREIGN KEY (courseId) REFERENCES courses (id)
+    externalId int,
+    FOREIGN KEY (externalId) REFERENCES courses (id)
 );
 
 
