@@ -1,21 +1,27 @@
-﻿@page "{externalId}"
+﻿@page "{externalId}/{name}"
 @model WebAppCommentBook.Pages.DirectionsModel
 @{
+    ViewData["Title"] = $"Directions {Model.name}";
+}
+@{
     var directions = ((List<APICommentBook.Models.BaseClass>)ViewData["Directions"]);
-    }
+}
 <p>
+    <h1>@Model.name</h1>
     @foreach (var x in directions)
     {
         <div class="gorizontal-line" style="float: left; margin-right: 2%; margin-top: 2% ">
             <div class="card" style="width: 18rem;">
 
                 <div class="card-body">
-                    @{var name = x.name;}
+                    @{
+                        var id = x.id;
+                        var name = x.name;
+                    }
                     <h5 class="card-title">@name</h5>
                     <p class="card-text">
-
                     </p>
-                    <a href="#" class="card-link">Ссылка карточки</a>
+                    <a href="/Courses/@id/@name" class="card-link">Перейти к курсам направления</a>
                 </div>
 
             </div>

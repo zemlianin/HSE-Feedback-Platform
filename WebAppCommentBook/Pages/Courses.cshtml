@@ -1,4 +1,30 @@
-﻿@page
+﻿@page "{externalId}/{name}"
 @model WebAppCommentBook.Pages.CoursesModel
 @{
+    ViewData["Title"] = $"Courses {Model.name}";
 }
+@{
+    var courses = ((List<APICommentBook.Models.BaseClass>)ViewData["Courses"]);
+}
+<p>
+    <h1>@Model.name</h1>
+    @foreach (var x in courses)
+    {
+        <div class="gorizontal-line" style="float: left; margin-right: 2%; margin-top: 2% ">
+            <div class="card" style="width: 18rem;">
+
+                <div class="card-body">
+                    @{
+                        var name = x.name;
+                        var id = x.id;
+                        }
+                    <h5 class="card-title">@name</h5>
+                    <p class="card-text">
+                    </p>
+                    <a href="/OneCourse/@id/@name" class="card-link">Отзывы к курсу</a>
+                </div>
+
+            </div>
+        </div>
+    }
+</p>
