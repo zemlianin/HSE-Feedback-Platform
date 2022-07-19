@@ -5,8 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using APICommentBook.Models;
-using System.Text.Json;
-
+using Newtonsoft.Json;
 
 namespace WebAppCommentBook.Pages
 {
@@ -21,10 +20,37 @@ namespace WebAppCommentBook.Pages
             this.externalId= externalId;
             var request = new RequestSender();
             
-            ViewData["Directions"] = JsonSerializer.Deserialize<List<BaseClass>>(
+            ViewData["Directions"] = System.Text.Json.JsonSerializer.Deserialize<List<BaseClass>>(
                 request.Get($"http://APICommentBook/Get-name-Directions-by-externalId?externalId="+externalId).Result);
-         //  System.IO.File.WriteAllText("output.txt", externalId.ToString());
+
+            ViewData["CommentsFacult"] = System.Text.Json.JsonSerializer.Deserialize<List<Comment>>(
+                request.Get($"http://APICommentBook/Get-comments-Facults-by-externalId?externalId={externalId}").Result);
+
         }
-      
+
+        public void OnPost(string msgUser, string nameUser, string emailUser, int externalId, string name)
+        {
+            this.externalId = externalId;
+            this.name = name;
+
+            var request = new RequestSender();
+            ViewData["Directions"] = System.Text.Json.JsonSerializer.Deserialize<List<BaseClass>>(
+                request.Get($"http://APICommentBook/Get-name-Directions-by-externalId?externalId=" + externalId).Result);
+            ViewData["CommentsFacult"] = System.Text.Json.JsonSerializer.Deserialize<List<Comment>>(
+                           request.Get($"http://APICommentBook/Get-comments-Facults-by-externalId?externalId={externalId}").Result);
+            var list = ViewData["CommentsFacult"];
+
+            var comment = new Comment()
+            {
+                id = ((List<Comment>)list).Count + 1,
+                name = nameUser,
+                externalId = externalId,
+                time = DateTime.Now.ToString(),
+                text = msgUser,
+            };
+            string json = JsonConvert.SerializeObject(comment);
+            request.Post($"http://APICommentBook/write-comment-facults?id={comment.id}&name={comment.name}_{emailUser}&externalId={comment.externalId}&time={comment.time}&text={comment.text}", json);
+        }
+
     }
 }

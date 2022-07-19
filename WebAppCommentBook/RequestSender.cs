@@ -24,34 +24,17 @@ namespace WebAppCommentBook
 
        public async Task<string> Get(string path)
         {
-
-            
-            var response = await _CLIENT.GetStringAsync(path);
-
-           
+            var response = await _CLIENT.GetStringAsync(path);         
             return response;
         }
 
         public async void Post(string path, string jObject)
         {
             string json = JsonConvert.SerializeObject(1);
-            HttpContent content = new StringContent(json);
-
-            
+            HttpContent content = new StringContent(json);            
             HttpResponseMessage response = await _CLIENT.PostAsync(path, content);      
-            
-          //  File.WriteAllText("output.txt", request.RequestUri.ToString()+" 1");
-        }
-        public async void PostWithBody(string path,string jObject)
-        {
-            // var content = new FormUrlEncodedContent(values);
-            var content = new StringContent(jObject.ToString());
 
-            var response = await _CLIENT.PostAsync(path, content);
-
-        //    var responseString = await response.Content.ReadAsStringAsync();
-              File.WriteAllText("output.txt", " 1");
-       //     var response = _CLIENT.SendAsync(request);
         }
+       
     }
 }

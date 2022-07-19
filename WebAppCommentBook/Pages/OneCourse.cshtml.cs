@@ -25,7 +25,7 @@ namespace WebAppCommentBook.Pages
 
             ViewData["CommentsCourse"] = System.Text.Json.JsonSerializer.Deserialize<List<Comment>>(
                 request.Get($"http://APICommentBook/Get-comments-Courses-by-externalId?externalId={externalId}").Result);
-            //System.IO.File.WriteAllText("output.txt", request.Get($"http://APICommentBook/Get-name-Courses-by-externalId?externalId=" + this.externalId).Result);
+          
         }
         public void OnPost(string msgUser, string nameUser, string emailUser, int externalId, string name)
         {
@@ -46,9 +46,6 @@ namespace WebAppCommentBook.Pages
                 time = DateTime.Now.ToString(),
                 text = msgUser,
             };
-            //  var options = new JsonSerializerOptions { WriteIndented = true };
-            //  string jsonString = JsonSerializer.Serialize(1, options);
-            // request.PostWithBody($"http://APICommentBook/write-comment-course", jsonString);
             string json = JsonConvert.SerializeObject(comment);
             request.Post($"http://APICommentBook/write-comment-course?id={comment.id}&name={comment.name}_{emailUser}&externalId={comment.externalId}&time={comment.time}&text={comment.text}",json);
         }
