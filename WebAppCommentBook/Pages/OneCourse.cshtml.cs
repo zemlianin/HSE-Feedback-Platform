@@ -35,7 +35,7 @@ namespace WebAppCommentBook.Pages
             var request = new RequestSender();
             
             ViewData["CommentsCourse"] = System.Text.Json.JsonSerializer.Deserialize<List<Comment>>(
-                           request.Get($"http://APICommentBook/Get-comments-Courses").Result);
+                           request.Get($"http://APICommentBook/Get-comments-Courses-by-externalId?externalId={externalId}").Result);
             var list = ViewData["CommentsCourse"];
 
             var comment = new Comment()
