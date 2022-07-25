@@ -51,7 +51,7 @@ namespace APICommentBook.Controllers
         public void SetWriteComment(Comment comment)
         {
            // System.IO.File.WriteAllText("output.txt", $"-{comment.id}");
-            ConnectDB.RequestDateBase($"insert into coursesComments values({comment.id},'{comment.name}','{comment.time}','{comment.text}',{comment.externalId});");
+            ConnectDB.RequestDateBase($"insert into coursesComments(name,time,info,externalId) values('{comment.name}','{comment.time}','{comment.text}',{comment.externalId});");
         }
         /// <summary>
         /// метод удаления комментария

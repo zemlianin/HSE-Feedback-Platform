@@ -50,9 +50,9 @@ namespace APICommentBook.Controllers
         /// </summary>
         /// <param name="comment">объект комментария, который будет добавлен в бд</param>
         [HttpPost("write-comment-facults")]
-        public void SetWriteComment( Comment comment)
-        {
-            ConnectDB.RequestDateBase($"insert into facultComments values({comment.id},'{comment.name}','{comment.time}','{comment.text}',{comment.externalId});");
+        public void SetWriteComment( Comment comment) {
+            // System.IO.File.WriteAllText("output.txt", $"-{comment.id}");
+            ConnectDB.RequestDateBase($"insert into facultComments(name,time,info,externalId) values('{comment.name}','{comment.time}','{comment.text}',{comment.externalId});");
         }
         /// <summary>
         /// метод удаления комментария
