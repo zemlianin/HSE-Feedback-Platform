@@ -45,9 +45,12 @@ namespace APICommentBook {
         /// </summary>
         /// <param name="comment">объект комментария, который будет добавлен в бд</param>
         [HttpPost("write-comment")]
-        public void SetWriteComment(Comment comment) {
-            System.IO.File.WriteAllText("output.txt", $"-{comment.id}");
-            ConnectDB.RequestDateBase($"insert into {tableName}Comments(name,time,info,externalId) values('{comment.name}','{comment.time}','{comment.text}',{comment.externalId});");
+        public void SetWriteComment( string name , string time, string text, string externalId) {
+            
+            System.IO.File.WriteAllText("output.txt", $"кабзда{32}");
+            // ConnectDB.RequestDateBase($"insert into {tableName}Comments(name,time,info,externalId) values('{comment.name}','{comment.time}','{comment.text}',{comment.externalId});");
+            ConnectDB.RequestDateBase($"insert into {tableName}Comments(name,time,info,externalId) values('{name}','{time}','{text}',{externalId});");
+
         }
 
         /// <summary>
