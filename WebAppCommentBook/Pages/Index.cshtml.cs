@@ -24,7 +24,7 @@ namespace WebAppCommentBook.Pages
         {
             var request = new RequestSender();
 
-            ViewData["Facults"] = JsonSerializer.Deserialize<List<BaseClass>>(request.Get("http://APICommentBook/facults/get-names").Result);
+            ViewData["Facults"] = JsonSerializer.Deserialize<List<BaseClass>>(await request.Get("http://APICommentBook/facults/get-names"));
 
 
            

@@ -18,7 +18,6 @@ namespace WebAppCommentBook.Pages
         public string name { get; set; }
         public void OnGet(int externalId, string name)
         {
-          
             this.name = name;
             this.externalId = externalId;
             var request = new RequestSender();
@@ -27,8 +26,8 @@ namespace WebAppCommentBook.Pages
                 request.Get($"http://APICommentBook/courses/get-comments-by-externalId?externalId={externalId}").Result);
           
         }
-        public void OnPost(string msgUser, string nameUser, string emailUser, int externalId, string name)
-        {
+        public void OnPost(string msgUser, string nameUser, string emailUser, int externalId, string name) {
+            var a = this.Page();
             this.externalId = externalId;
             this.name = name;
             
