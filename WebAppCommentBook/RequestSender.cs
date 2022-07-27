@@ -28,12 +28,12 @@ namespace WebAppCommentBook
             return response;
         }
 
-        public async void Post(string path, string jObject)
+        public async Task<HttpStatusCode> Post(string path, string jObject)
         {
             string json = JsonConvert.SerializeObject(1);
             HttpContent content = new StringContent(json);            
-            HttpResponseMessage response = await _CLIENT.PostAsync(path, content);      
-
+            HttpResponseMessage response = await _CLIENT.PostAsync(path, content);
+            return response.StatusCode;
         }
        
     }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using APICommentBook;
+using APICommentBook.Models;
 using Newtonsoft.Json;
 
 namespace WebAppCommentBook.Pages
@@ -21,35 +21,37 @@ namespace WebAppCommentBook.Pages
             var request = new RequestSender();
             
             ViewData["Directions"] = System.Text.Json.JsonSerializer.Deserialize<List<BaseClass>>(
-                request.Get($"http://APICommentBook/directions/get-names-by-externalId?externalId=" +externalId).Result);
+                request.Get($"http://APICommentBook/Get-name-Directions-by-externalId?externalId="+externalId).Result);
 
             ViewData["CommentsFacult"] = System.Text.Json.JsonSerializer.Deserialize<List<Comment>>(
-                request.Get($"http://APICommentBook/facults/get-comments-by-externalId?externalId={externalId}").Result);
+                request.Get($"http://APICommentBook/Get-comments-Facults-by-externalId?externalId={externalId}").Result);
 
         }
 
-        public void OnPost(string msgUser, string nameUser, string emailUser, int externalId, string name)
+        public  void OnPost(string msgUser, string nameUser, string emailUser, int externalId, string name)
         {
             this.externalId = externalId;
             this.name = name;
 
             var request = new RequestSender();
             ViewData["Directions"] = System.Text.Json.JsonSerializer.Deserialize<List<BaseClass>>(
-                request.Get($"http://APICommentBook/directions/get-names-by-externalId?externalId=" + externalId).Result);
-            ViewData["CommentsFacult"] = System.Text.Json.JsonSerializer.Deserialize<List<Comment>>(
-                           request.Get($"http://APICommentBook/facults/get-comments-by-externalId?externalId={externalId}").Result);
-            var list = ViewData["CommentsFacult"];
+                request.Get($"http://APICommentBook/Get-name-Directions-by-externalId?externalId=" + externalId).Result);
+          
 
             var comment = new Comment()
             {
-                id = ((List<Comment>)list).Count + 1,
+                id = 1,
                 name = nameUser,
                 externalId = externalId,
                 time = DateTime.Now.ToString(),
                 text = msgUser,
             };
             string json = JsonConvert.SerializeObject(comment);
-            request.Post($"http://APICommentBook/facults/write-comment?id={comment.id}&name={comment.name}_{emailUser}&externalId={comment.externalId}&time={comment.time}&text={comment.text}", json);
+            var statusCode = request.Post($"http://APICommentBook/write-comment-facults?id={comment.id}&name={comment.name}_{emailUser}&externalId={comment.externalId}&time={comment.time}&text={comment.text}", json);
+
+            while (statusCode.IsCompleted != true) ;
+            ViewData["CommentsFacult"] = System.Text.Json.JsonSerializer.Deserialize<List<Comment>>(
+                           request.Get($"http://APICommentBook/Get-comments-Facults-by-externalId?externalId={externalId}").Result);
         }
 
     }
