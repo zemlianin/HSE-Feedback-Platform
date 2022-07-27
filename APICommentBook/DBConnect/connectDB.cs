@@ -5,15 +5,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using Npgsql;
 using System.Data.Common;
-using APICommentBook.Models;
 using System.IO;
-namespace APICommentBook.Controllers
+
+namespace APICommentBook
 {
     /// <summary>
     /// класс который содержит в себе методы работы с бд и методы подключения к бд
     /// </summary>
     public class ConnectDB
     {
+        private const string ConnectionString = "Server=postgres;Port=5432;User Id=app;Password=app;Database=mydbname2;";
         static internal Logger logger = new Logger("log.txt");
         /// <summary>
         /// Чтение учебной подкгруппы(факультет курс направление)
@@ -28,13 +29,12 @@ namespace APICommentBook.Controllers
             {
                
                 List<T> list = new List<T>();
-                String connectionString = "Server=postgres;Port=5432;User Id=app;Password=app;Database=mydbname2;";
-                using (NpgsqlConnection npgSqlConnection = new NpgsqlConnection(connectionString))
+                using (NpgsqlConnection npgSqlConnection = new NpgsqlConnection(ConnectionString))
                 {
                     npgSqlConnection.Open();
                     NpgsqlCommand npgSqlCommand = new NpgsqlCommand(command, npgSqlConnection);
                     NpgsqlDataReader npgSqlDataReader = npgSqlCommand.ExecuteReader();
-                    if (npgSqlDataReader.HasRows)
+                    if (npgSqlDataReader.HasRows) // ????
                     {
                         foreach (DbDataRecord dbDataRecord in npgSqlDataReader)
                         {
@@ -76,13 +76,12 @@ namespace APICommentBook.Controllers
             try
             {
                 List<Comment> list = new List<Comment>();
-                String connectionString = "Server=postgres;Port=5432;User Id=app;Password=app;Database=mydbname2;";
-                using (NpgsqlConnection npgSqlConnection = new NpgsqlConnection(connectionString))
+                using (NpgsqlConnection npgSqlConnection = new NpgsqlConnection(ConnectionString))
                 {
                     npgSqlConnection.Open();
                     NpgsqlCommand npgSqlCommand = new NpgsqlCommand(command, npgSqlConnection);
                     NpgsqlDataReader npgSqlDataReader = npgSqlCommand.ExecuteReader();
-                    if (npgSqlDataReader.HasRows)
+                    if (npgSqlDataReader.HasRows) // ????
                     {
                         foreach (DbDataRecord dbDataRecord in npgSqlDataReader)
                         {
@@ -115,8 +114,7 @@ namespace APICommentBook.Controllers
         {
             try
             {
-                String connectionString = "Server=postgres;Port=5432;User Id=app;Password=app;Database=mydbname2;";
-                using (NpgsqlConnection npgSqlConnection = new NpgsqlConnection(connectionString))
+                using (NpgsqlConnection npgSqlConnection = new NpgsqlConnection(ConnectionString))
                 {
                     npgSqlConnection.Open();
                     NpgsqlCommand npgSqlCommand = new NpgsqlCommand(command, npgSqlConnection);

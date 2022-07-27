@@ -2,12 +2,11 @@
 
 CREATE TABLE facults
 (
-	   id SERIAL primary key,
+	id SERIAL primary key,
 	name text not null
-	
 );
 
-CREATE TABLE facultComments
+CREATE TABLE facultsComments
 (
     id SERIAL primary key,
 	name text,
@@ -25,7 +24,7 @@ CREATE TABLE directions
     FOREIGN KEY (externalId) REFERENCES facults (id)
 	
 );
-CREATE TABLE directionComments
+CREATE TABLE directionsComments
 (
     id SERIAL primary key,
 	name text,

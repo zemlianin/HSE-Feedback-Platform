@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Text.Json;
-using APICommentBook.Models;
+using APICommentBook;
 
 namespace WebAppCommentBook.Pages
 {
@@ -24,7 +24,7 @@ namespace WebAppCommentBook.Pages
         {
             var request = new RequestSender();
 
-            ViewData["Facults"] = JsonSerializer.Deserialize<List<BaseClass>>(request.Get("http://APICommentBook/Get-name-Facults").Result);
+            ViewData["Facults"] = JsonSerializer.Deserialize<List<BaseClass>>(request.Get("http://APICommentBook/facults/get-names").Result);
 
 
            

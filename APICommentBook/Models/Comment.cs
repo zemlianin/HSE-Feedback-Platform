@@ -1,7 +1,5 @@
-﻿namespace APICommentBook.Models
-{
-    public class Comment
-    {
+﻿namespace APICommentBook {
+    public class Comment {
         public int id { get; set; }
         //Имя пользователя.
         public string name { get; set; }

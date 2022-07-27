@@ -4,10 +4,10 @@
     ViewData["Title"] = $"Courses {Model.name}";
 }
 @{
-    var courses = ((List<APICommentBook.Models.BaseClass>)ViewData["Courses"]);
+    var courses = ((List<APICommentBook.BaseClass>)ViewData["Courses"]);
 }
 @{
-    var commentsDirection = ((List<APICommentBook.Models.Comment>)ViewData["CommentsDirection"]);
+    var commentsDirection = ((List<APICommentBook.Comment>)ViewData["CommentsDirection"]);
 }
 
 <p>

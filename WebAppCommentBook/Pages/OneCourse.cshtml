@@ -4,7 +4,7 @@
     ViewData["Title"] = $"{Model.name}";
 }
 @{
-    var commentsCourse = ((List<APICommentBook.Models.Comment>)ViewData["CommentsCourse"]);
+    var commentsCourse = ((List<APICommentBook.Comment>)ViewData["CommentsCourse"]);
 }
 <p>
     <h1>@Model.name</h1>
@@ -58,6 +58,7 @@
             </div>
         </div>
     </div>
+    <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
 </section>
 
 

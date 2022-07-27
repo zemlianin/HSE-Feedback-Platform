@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace APICommentBook.Models
+namespace APICommentBook
 {
-    interface IStudyPart
+    public interface IStudyPart
     {
         public int id { get; set; }
         public string name { get; set; }

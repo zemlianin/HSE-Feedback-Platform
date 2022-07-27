@@ -1,4 +1,4 @@
-﻿namespace APICommentBook.Models
+﻿namespace APICommentBook
 {
     public class BaseClass : IStudyPart
     {
